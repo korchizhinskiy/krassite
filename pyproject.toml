@@ -10,6 +10,8 @@ packages = [{include = "work_test"}]
 python = "^3.11"
 django = "^4.1.4"
 djangorestframework = "^3.14.0"
+python-dotenv = "^0.21.0"
+psycopg2 = "^2.9.5"
 
 
 [build-system]
