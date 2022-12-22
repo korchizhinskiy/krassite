@@ -12,10 +12,13 @@ django = "^4.1.4"
 djangorestframework = "^3.14.0"
 python-dotenv = "^0.21.0"
 psycopg2 = "^2.9.5"
+pillow = "^9.3.0"
 
 
 [tool.poetry.group.dev.dependencies]
 django-debug-toolbar = "^3.8.1"
+pyright = "^1.1.285"
+django-stubs = "^1.13.1"
 
 [build-system]
 requires = ["poetry-core"]
