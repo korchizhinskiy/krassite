@@ -1,6 +1,9 @@
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
 from django.contrib.auth.models import User
 from PIL import Image
+from os import path
 
 
 class New(models.Model):
@@ -16,7 +19,6 @@ class New(models.Model):
                                         )
     image = models.ImageField(verbose_name="Изображение", upload_to="img")
     preview_image = models.ImageField(verbose_name="Превью",
-                                      upload_to="prev_img",
                                       null=True, blank=True)
     author = models.ForeignKey(User,
                                verbose_name="Автор",
@@ -28,18 +30,37 @@ class New(models.Model):
 
     def save(self):
         super().save()
+        self.save_preview_image()
+        return super(New, self).save()
+
+    def save_preview_image(self):
+        """Define preview_image from main image by reducing image size"""
         image = Image.open(self.image.path)
-        image_path, image_extension = self.image.path.split(".")
+        image_name, image_extension = path.splitext(self.image.path)
 
         # Get new path for preview image with suffix _prev
-        preview_path = f"{image_path}_prev.{image_extension}"
+        preview_path = f"{image_name}_prev{image_extension}"
 
         if image.height > 200 or image.width > 200:
-            output_size = (200, 200)
-            image.thumbnail(output_size)
-            image.save(preview_path)
+            self.resize_photo(image, preview_path)
+
+        self.preview_image.name = "img/" + path.basename(preview_path)
+
+    def resize_photo(self, image: Image.Image, preview_path: str):
+        """Function of resize photo by given values"""
+        output_size = (200, 200)
+        image.thumbnail(output_size)
+        image.save(preview_path)
 
     class Meta:
         verbose_name = "Публикация"
         verbose_name_plural = "Публикации"
         db_table = "new"
+
+
+@receiver(pre_delete, sender=New)
+def images_model_delete(instance, **kwargs):
+    """Signal which delete image and preview_image from media path"""
+    if instance.image.name:
+        instance.image.delete(False)
+        instance.preview_image.delete(False)
