@@ -13,6 +13,7 @@ djangorestframework = "^3.14.0"
 python-dotenv = "^0.21.0"
 psycopg2 = "^2.9.5"
 pillow = "^9.3.0"
+django-summernote = "^0.8.20.0"
 
 
 [tool.poetry.group.dev.dependencies]

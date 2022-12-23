@@ -10,6 +10,22 @@ python-versions = ">=3.7"
 tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
 
 [[package]]
+name = "bleach"
+version = "5.0.1"
+description = "An easy safelist-based HTML-sanitizing tool."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+six = ">=1.9.0"
+webencodings = "*"
+
+[package.extras]
+css = ["tinycss2 (>=1.1.0,<1.2)"]
+dev = ["Sphinx (==4.3.2)", "black (==22.3.0)", "build (==0.8.0)", "flake8 (==4.0.1)", "hashin (==0.17.0)", "mypy (==0.961)", "pip-tools (==6.6.2)", "pytest (==7.1.2)", "tox (==3.25.0)", "twine (==4.0.1)", "wheel (==0.37.1)"]
+
+[[package]]
 name = "django"
 version = "4.1.4"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
@@ -69,6 +85,21 @@ python-versions = ">=3.7"
 [package.dependencies]
 django = "*"
 typing-extensions = "*"
+
+[[package]]
+name = "django-summernote"
+version = "0.8.20.0"
+description = "Summernote plugin for Django"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+bleach = "*"
+django = "*"
+
+[package.extras]
+dev = ["django-dummy-plug", "pytest", "pytest-django"]
 
 [[package]]
 name = "djangorestframework"
@@ -187,6 +218,14 @@ testing = ["build[virtualenv]", "filelock (>=3.4.0)", "flake8 (<5)", "flake8-202
 testing-integration = ["build[virtualenv]", "filelock (>=3.4.0)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "pytest", "pytest-enabler", "pytest-xdist", "tomli", "virtualenv (>=13.0.0)", "wheel"]
 
 [[package]]
+name = "six"
+version = "1.16.0"
+description = "Python 2 and 3 compatibility utilities"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+
+[[package]]
 name = "sqlparse"
 version = "0.4.3"
 description = "A non-validating SQL parser."
@@ -234,15 +273,27 @@ category = "main"
 optional = false
 python-versions = ">=2"
 
+[[package]]
+name = "webencodings"
+version = "0.5.1"
+description = "Character encoding aliases for legacy web content"
+category = "main"
+optional = false
+python-versions = "*"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.11"
-content-hash = "db980fa63e0b654e069f09bc2d63769cb18db8954e902996f9e1617971f0b95a"
+content-hash = "d089839633cfb8433db28e7d437e9caffbdd34c972a3f45ae5ab5be18bf7c892"
 
 [metadata.files]
 asgiref = [
     {file = "asgiref-3.6.0-py3-none-any.whl", hash = "sha256:71e68008da809b957b7ee4b43dbccff33d1b23519fb8344e33f049897077afac"},
     {file = "asgiref-3.6.0.tar.gz", hash = "sha256:9567dfe7bd8d3c8c892227827c41cce860b368104c3431da67a0c5a65a949506"},
+]
+bleach = [
+    {file = "bleach-5.0.1-py3-none-any.whl", hash = "sha256:085f7f33c15bd408dd9b17a4ad77c577db66d76203e5984b1bd59baeee948b2a"},
+    {file = "bleach-5.0.1.tar.gz", hash = "sha256:0d03255c47eb9bd2f26aa9bb7f2107732e7e8fe195ca2f64709fcf3b0a4a085c"},
 ]
 django = [
     {file = "Django-4.1.4-py3-none-any.whl", hash = "sha256:0b223bfa55511f950ff741983d408d78d772351284c75e9f77d2b830b6b4d148"},
@@ -259,6 +310,9 @@ django-stubs = [
 django-stubs-ext = [
     {file = "django-stubs-ext-0.7.0.tar.gz", hash = "sha256:4fd8cdbc68d1a421f21bb7e0d9e76d50f6a4b504d350ba786405daf536e90c21"},
     {file = "django_stubs_ext-0.7.0-py3-none-any.whl", hash = "sha256:d729fbc7fe8970a7e26b35956c35b48502516f011d523c0577bdfb02ed956284"},
+]
+django-summernote = [
+    {file = "django-summernote-0.8.20.0.tar.gz", hash = "sha256:52e9b12438ed9eac0d77729f758f2aae06e468b5cbce133e24100d58ae4e43a8"},
 ]
 djangorestframework = [
     {file = "djangorestframework-3.14.0-py3-none-any.whl", hash = "sha256:eb63f58c9f218e1a7d064d17a70751f528ed4e1d35547fdade9aaf4cd103fd08"},
@@ -398,6 +452,10 @@ setuptools = [
     {file = "setuptools-65.6.3-py3-none-any.whl", hash = "sha256:57f6f22bde4e042978bcd50176fdb381d7c21a9efa4041202288d3737a0c6a54"},
     {file = "setuptools-65.6.3.tar.gz", hash = "sha256:a7620757bf984b58deaf32fc8a4577a9bbc0850cf92c20e1ce41c38c19e5fb75"},
 ]
+six = [
+    {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
+    {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
+]
 sqlparse = [
     {file = "sqlparse-0.4.3-py3-none-any.whl", hash = "sha256:0323c0ec29cd52bceabc1b4d9d579e311f3e4961b98d174201d5622a23b85e34"},
     {file = "sqlparse-0.4.3.tar.gz", hash = "sha256:69ca804846bb114d2ec380e4360a8a340db83f0ccf3afceeb1404df028f57268"},
@@ -421,4 +479,8 @@ typing-extensions = [
 tzdata = [
     {file = "tzdata-2022.7-py2.py3-none-any.whl", hash = "sha256:2b88858b0e3120792a3c0635c23daf36a7d7eeeca657c323da299d2094402a0d"},
     {file = "tzdata-2022.7.tar.gz", hash = "sha256:fe5f866eddd8b96e9fcba978f8e503c909b19ea7efda11e52e39494bad3a7bfa"},
+]
+webencodings = [
+    {file = "webencodings-0.5.1-py2.py3-none-any.whl", hash = "sha256:a0af1213f3c2226497a97e2b3aa01a7e4bee4f403f95be16fc9acd2947514a78"},
+    {file = "webencodings-0.5.1.tar.gz", hash = "sha256:b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923"},
 ]
