@@ -1,6 +1,6 @@
 import os
-from dotenv import load_dotenv
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,9 +31,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'debug_toolbar',
-    
+
     'rest_framework',
-    
+
     'news.apps.NewsConfig',
 ]
 
@@ -121,10 +121,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
-        ]
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -137,9 +137,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # REST SETTINGS
 REST_FRAMEWORK = {
-        'DEFAULT_RENDERER_CLASSES': [
-            'rest_framework.renderers.JSONRenderer',
-            'rest_framework.renderers.BrowsableAPIRenderer',
-            ]
-        }
-
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
