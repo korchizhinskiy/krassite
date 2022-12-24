@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 from django.contrib.auth.models import User
+from django.utils.safestring import mark_safe
 from PIL import Image
 from os import path
 
@@ -26,7 +27,7 @@ class New(models.Model):
                                )
 
     def __str__(self):
-        return self.title
+        return mark_safe(self.title)
 
     def save(self):
         super().save()
