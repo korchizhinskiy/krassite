@@ -7,6 +7,12 @@ from PIL import Image
 from os import path
 
 
+class Contact(models.Model):
+    """Contact Model"""
+    name = models.CharField(verbose_name="Имя", max_length=255)
+    email = models.EmailField(verbose_name="Почтовый адрес")
+
+
 class New(models.Model):
     """New Model"""
     id = models.AutoField(primary_key=True)
