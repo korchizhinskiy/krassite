@@ -16,6 +16,7 @@ pillow = "^9.3.0"
 django-summernote = "^0.8.20.0"
 celery = "^5.2.7"
 redis = "^4.4.0"
+django-import-export = "^3.0.2"
 
 
 [tool.poetry.group.dev.dependencies]
