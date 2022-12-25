@@ -34,8 +34,10 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django_summernote',
+    'import_export',
 
     'news.apps.NewsConfig',
+    'places.apps.PlacesConfig'
 ]
 
 MIDDLEWARE = [
