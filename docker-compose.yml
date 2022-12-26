@@ -1,15 +1,32 @@
 version: "3.8"
 
 services:
-  db:
-    container_name: db
-    image: postgres:15-alpine
+  redis:
+    image: redis
+    restart: always
+  
+  database:
+    image: postgres:13.3
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  webapp:
+    restart: always
+    depends_on:
+      - database
     env_file:
       - ./.env
-    volumes:
-      - .postgres_data:/var/lib/postgresql/data/
+    build:
+      context: .
+    stdin_open: true
+    tty: true
     ports:
-      - 5432:5432
-    environment:
-      - PASSWORD=ltvbl2002
-    
+      - 8000:8000
+    # command: sh -c "python3 manage.py flush --noinput"
+    command: sh -c "python3 manage.py makemigrations &&
+                    python3 manage.py migrate"
+volumes:
+  postgres_data:
