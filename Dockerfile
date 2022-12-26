@@ -1,17 +1,17 @@
 FROM python:3.11-alpine
-
-MAINTAINER Korchizhinskiy Nazar
+# RUN apt-get update -y
+# RUN apt-get upgrade -y
 
 ENV PYTHONUNBUFFERED 1
 
-COPY ./requirements.txt /requirements.txt
+WORKDIR .
 
-RUN pip install -r /requirements.txt
+COPY ./requirements.txt ./requirements.txt
 
-RUN mkdir /app
-WORKDIR /app
-COPY . /app
+RUN pip install --upgrade pip
+RUN pip install -r ./requirements.txt
 
-RUN adduser -D user
+COPY . .
 
-USER user
+EXPOSE 8000
+
