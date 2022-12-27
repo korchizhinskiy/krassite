@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -148,18 +147,19 @@ REST_FRAMEWORK = {
 
 # CELERY
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = os.getenv("MAIL_USER")
-EMAIL_HOST_PASSWORD = os.getenv("MAIL_PASSWORD")
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 
 # REDIS
 REDIS_HOST = "0.0.0.0"
 REDIS_PORT = "6379"
 CELERY_BROKER_URL = f"redis://redis:{REDIS_PORT}/0"
 CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
-CELERY_RESULT_BACKEND = f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
-CELERY_ACCEPT_CONTENT = ["applications/json"]
+CELERY_RESULT_BACKEND = f"redis://redis:{REDIS_PORT}/0"
+CELERY_ACCEPT_CONTENT = ['json', 'application/text']
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
