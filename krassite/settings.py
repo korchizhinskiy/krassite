@@ -1,5 +1,8 @@
 import os
+from collections import OrderedDict
+from datetime import time
 from pathlib import Path
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_summernote',
     'import_export',
+    'constance',
 
     'news.apps.NewsConfig',
     'places.apps.PlacesConfig'
@@ -164,3 +168,12 @@ CELERY_RESULT_BACKEND = f"redis://redis:{REDIS_PORT}/0"
 CELERY_ACCEPT_CONTENT = ['json', 'application/text']
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
+
+# CONSTANCE
+CONSTANCE_BACKEND = 'constance.backends.redisd.RedisBackend'
+CONSTANCE_REDIS_CONNECTION = 'redis://redis:6379/0'
+CONSTANCE_CONFIG = OrderedDict([
+    ('MESSAGE_TOPIC', ('KRASSITE Project', 'Message topic')),
+    ('MESSAGE_TEXT', ('Добрый день!', 'Message text')),
+    ('TIME_PUBLISH', (time(12, 0, 0), 'Time to publish')),
+])
