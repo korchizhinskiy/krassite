@@ -32,14 +32,16 @@ services:
                     python3 manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./media/img/:/media/img/
+    depends_on:
+      - worker
     
   worker:
     restart: always
     build:
       context: .
     command: ["celery", "--workdir=./", "-A", "krassite", "worker"]
-    depends_on:
-      - webapp
+    env_file:
+      - ./.env
           
 volumes:
   postgres_data:
