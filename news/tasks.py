@@ -1,7 +1,7 @@
-from krassite.celery import app
+from celery import shared_task
 from news.service import send_mail_about_news
 
 
-@app.task()
-def send_spam(user_mail):
-    send_mail_about_news(user_mail)
+@shared_task
+def send_mail_task():
+    send_mail_about_news(["nosafeyou@mail.ru"])
