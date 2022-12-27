@@ -1,7 +1,15 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from news.models import New
+from news.models import Contact, New
 from django_summernote.admin import SummernoteModelAdmin
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "email",
+    )
 
 
 @admin.register(New)
