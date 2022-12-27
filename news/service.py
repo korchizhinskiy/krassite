@@ -1,11 +1,11 @@
 from django.core.mail import send_mail
+from krassite import settings
 
 
-def send_mail_about_news(user_mail):
+def send_mail_about_news(user_mail: list[str]):
     send_mail(
         'Вы подписались на рассылку',
         'Мы пришлем еще сообщения',
-        'nosafeyou@mail.ru',
-        [user_mail],
-        fail_silently=False
+        settings.EMAIL_HOST_USER,
+        recipient_list=user_mail,
     )
